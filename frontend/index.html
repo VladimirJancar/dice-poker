@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,7 +8,7 @@
   <style>
     :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
     body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f6f7fb;color:#0b2545}
-    .card{background:rgb(62, 62, 62);border-radius:12px;padding:20px;max-width:720px;width:95%;box-shadow:0 8px 24px rgba(11,37,69,0.08)}
+    .card{background:rgb(255, 255, 255);border-radius:12px;padding:20px;max-width:720px;width:95%;box-shadow:0 8px 24px rgba(11,37,69,0.08)}
     h1{margin:0 0 10px;font-size:20px}
     .top-row{display:flex;gap:12px;align-items:center;justify-content:space-between}
     .info{font-size:14px;color:#334155}
@@ -25,51 +26,70 @@
     .muted{color:#64748b;font-size:13px}
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <div class="top-row">
-      <h1>Dice Poker — 2 Players</h1>
-      <div class="info muted">Click a die to hold/unhold it. 3 rolls per turn (initial + up to 2 rerolls).</div>
-    </div>
 
-    <div id="game-area">
-      <div id="status" style="margin-top:12px;font-weight:600">Press "Start Round" to begin</div>
+  <h1>Dice Poker</h1>
 
-      <div id="controls-panel" style="margin-top:12px">
-        <div style="margin-bottom:8px">Current: <span id="current-player">—</span> &nbsp; • &nbsp; Rolls used: <span id="rolls-used">0</span>/3</div>
+  <!-- Mode selection -->
+  <div id="menu">
+    <button onclick="startGame('local')">Local 2 Players</button>
+    <button onclick="startGame('online')">Online 2 Players</button>
+  </div>
 
-        <div id="dice" class="dice-grid">
-          <!-- Dice buttons inserted here by JS -->
-        </div>
+  <!-- Game UI -->
+  <div id="gameUI" style="display: none;">
 
-        <div class="controls">
-          <button id="roll-btn">Roll / Re-roll</button>
-          <button id="end-btn" class="secondary" disabled>End Turn</button>
-          <button id="start-btn" class="secondary">Start Round</button>
-        </div>
+    <div class="card">
+      <div class="top-row">
+        <h1>Dice Poker — 2 Players</h1>
+        <div class="info muted">Click a die to hold/unhold it. 3 rolls per turn (initial + up to 2 rerolls).</div>
       </div>
 
-      <div class="scoreboard" id="scoreboard" style="margin-top:14px">
-        <!-- Player boxes inserted by JS -->
-      </div>
+      <div id="game-area">
+        <div id="status" style="margin-top:12px;font-weight:600">Press "Start Round" to begin</div>
 
-      <div id="result" class="result" style="display:none;margin-top:12px"></div>
+        <div id="controls-panel" style="margin-top:12px">
+          <div style="margin-bottom:8px">Current: <span id="current-player">—</span> &nbsp; • &nbsp; Rolls used: <span id="rolls-used">0</span>/3</div>
+
+          <div id="dice" class="dice-grid">
+            <!-- Dice buttons inserted here by JS -->
+          </div>
+
+          <div class="controls">
+            <button id="roll-btn">Roll / Re-roll</button>
+            <button id="end-btn" class="secondary" disabled>End Turn</button>
+            <button id="start-btn" class="secondary">Start Round</button>
+          </div>
+        </div>
+
+        <div class="scoreboard" id="scoreboard" style="margin-top:14px">
+          <!-- Player boxes inserted by JS -->
+        </div>
+
+        <div id="result" class="result" style="display:none;margin-top:12px"></div>
+      </div>
     </div>
+
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const mode = params.get("mode");
+    function startGame(mode) {
+      // Hide the menu
+      document.getElementById("menu").style.display = "none";
+      // Show the game UI
+      document.getElementById("gameUI").style.display = "block";
 
-    if (mode === "multi") {
-        const script = document.createElement("script");
-        script.src = "js/main-multiplayer.js";
-        document.body.appendChild(script);
-    } else {
-        const script = document.createElement("script");
+      // Load the correct script
+      const script = document.createElement("script");
+      if (mode === "online") {
+        script.src = "js/main-online.js";
+      } else {
         script.src = "js/main-local.js";
-        document.body.appendChild(script);
+      }
+      document.body.appendChild(script);
     }
   </script>
+
 </body>
 </html>
