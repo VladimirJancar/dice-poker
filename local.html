@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dice Poker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="card">
+        
+        <div class="top-row">
+            <h1>Dice Poker</h1>
+            <div class="info muted">Click a die to hold/unhold it. 3 rolls per turn (initial + up to 2 rerolls).</div>
+        </div>
+
+        <div id="game-area">
+            <div id="status">Press "Start Round" to begin</div>
+
+            <div id="controls-panel" style="margin-top:12px">
+            <div>Current: <span id="current-player">—</span> &nbsp; • &nbsp; Rolls used: <span id="rolls-used">0</span>/3</div>
+
+            <div id="dice" class="dice-grid"></div>
+
+            <div class="controls">
+                <button id="roll-btn">Roll / Re-roll</button>
+                <button id="end-btn" class="secondary" disabled>End Turn</button>
+                <button id="start-btn" class="secondary">Start Round</button>
+            </div>
+        </div>
+
+        <div class="scoreboard" id="scoreboard" style="margin-top:14px"></div>
+        <div id="result" class="result" style="display:none;margin-top:12px"></div>
+
+    </div>
+  
+  <script src="js/constants.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/evaluate.js"></script>
+  <script src="js/gameLogic.js"></script>
+  <script src="js/main-local.js"></script>
+</body>
+</html>
