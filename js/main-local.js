@@ -1,18 +1,4 @@
-const DIE_FACE = ['⚀','⚁','⚂','⚃','⚄','⚅']; // unicode dice
 
-function randDie(){ return Math.floor(Math.random()*6)+1; }
-// function clone(x){ return JSON.parse(JSON.stringify(x)); }
-
-// Lexicographic compare for score arrays
-function compareScores(a,b){
-  for(let i=0;i<Math.max(a.length,b.length);i++){
-    const ai = a[i]||0;
-    const bi = b[i]||0;
-    if(ai>bi) return 1;
-    if(ai<bi) return -1;
-  }
-  return 0; // exact tie
-}
 const game = {
   currentPlayer: 0, // 0 or 1
   players: [
@@ -22,53 +8,7 @@ const game = {
   held: [false,false,false,false,false], // during current player's turn
   roundActive: false
 };
-// ---------- DOM references ----------
-const currentPlayerSpan = document.getElementById('current-player');
-const rollsUsedSpan = document.getElementById('rolls-used');
-const diceDiv = document.getElementById('dice');
-const rollBtn = document.getElementById('roll-btn');
-const endBtn = document.getElementById('end-btn');
-const startBtn = document.getElementById('start-btn');
-const statusDiv = document.getElementById('status');
-const scoreboardDiv = document.getElementById('scoreboard');
-const resultDiv = document.getElementById('result');
 
-// Initialize UI with empty dice
-function initUI(){
-  diceDiv.innerHTML = '';
-  for(let i=0;i<5;i++){
-    const b = document.createElement('button');
-    b.className = 'die';
-    b.textContent = DIE_FACE[0];
-    b.disabled = true;
-    b.addEventListener('click', ()=>toggleHold(i));
-    diceDiv.appendChild(b);
-  }
-  renderScoreboard();
-  updateStatus();
-}
-// Render scoreboard (players' finished hands and evaluations)
-function renderScoreboard(){
-  scoreboardDiv.innerHTML = '';
-  game.players.forEach((p,idx)=>{
-    const box = document.createElement('div');
-    box.className = 'player-box';
-    const title = document.createElement('div');
-    title.style.fontWeight='700';
-    title.textContent = p.name + (game.currentPlayer===idx && game.roundActive ? ' ←' : '');
-    box.appendChild(title);
-    const info = document.createElement('div');
-    info.style.marginTop='8px';
-    if(p.finished){
-      info.innerHTML = `<div><strong>Final:</strong> ${p.hand.map(n=>DIE_FACE[n-1]).join(' ')}</div>
-                        <div><strong>Hand:</strong> ${p.score || '—'}</div>`;
-    } else {
-      info.innerHTML = `<div><strong>Status:</strong> ${p.rollsUsed>0?`rolled (${p.rollsUsed}/3)`:'not played'}</div>`;
-    }
-    box.appendChild(info);
-    scoreboardDiv.appendChild(box);
-  });
-}
 // Update top status and dice UI
 function updateStatus(){
   if(!game.roundActive){
