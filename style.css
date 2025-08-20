@@ -110,17 +110,11 @@ body {
   gap: 20px;
 }
 
-
-.bottom-section {
-  display: flex;
-  gap: 20px;
+#start-btn {
+  margin-left: auto;
 }
 
-
-
 .back-btn {
-  /* padding: 8px 12px; Removed position: relative and left: 20px */
-  /* border-radius: 8px; */
   border: 0;
   background: #383838;
   color: white;

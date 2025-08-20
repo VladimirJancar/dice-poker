@@ -14,7 +14,7 @@ function updateStatus(){
   if(!game.roundActive){
     statusDiv.textContent = 'Press "Start Round" to begin';
     currentPlayerSpan.textContent = '—';
-    rollsUsedSpan.textContent = '0';
+    rollsLeftSpan.textContent = '3';
     rollBtn.disabled = true;
     endBtn.disabled = true;
     resultDiv.style.display = 'none';
@@ -23,7 +23,7 @@ function updateStatus(){
   const p = game.players[game.currentPlayer];
   statusDiv.textContent = `${p.name}'s turn`;
   currentPlayerSpan.textContent = p.name;
-  rollsUsedSpan.textContent = p.rollsUsed;
+  rollsLeftSpan.textContent = 3-p.rollsUsed;
   // enable / disable buttons
   rollBtn.disabled = (p.rollsUsed>=3);
   endBtn.disabled = (p.rollsUsed===0);
