@@ -26,25 +26,22 @@
             <div class="navbar">
                 <button class="back-btn" onclick="location.href='index.html'">Back to Menu</button>
                 <h1>Local 1v1</h1>
-                <button class="hand-info" onclick="">Hand info</button>
+                <button disabled class="hand-info" onclick="">Hand info</button>
             </div>
 
-
-            <!-- <div class="card">     -->
-                <div class="top-section">
-                    
-                    <div class="info muted">Click a die to hold/unhold it. 3 rolls per turn (initial + up to 2 rerolls).</div>
-                </div>
-
-                <div class="middle-section">
-                    <div class="game">
+            <div class="middle-section">
+                <div class="middle-left">
+                    <div class="card"><div class="player-info">            
                         <div id="status">Press "Start Round" to begin</div>
+                    </div></div>
 
+                    <div class="card">
+                        <div id="dice" class="dice-grid"></div>
+                    </div>
+                    
+                    <div class="card">
                         <div id="controls-panel" style="margin-top:12px">
-                            <div>Current: <span id="current-player">—</span> &nbsp; • &nbsp; Rolls used: <span id="rolls-used">0</span>/3</div>
-
-                            <div id="dice" class="dice-grid"></div>
-
+                            <div>Rolls used: <span id="rolls-used">0</span>/3</div>
                             <div class="controls">
                                 <button id="roll-btn">Roll / Re-roll</button>
                                 <button id="end-btn" class="secondary" disabled>End Turn</button>
@@ -56,31 +53,30 @@
                         <div id="result" class="result" style="display:none;margin-top:12px"></div>
                     </div>
                     
-                    <div class="rules">
-                        <h3 style="text-align: center; margin-top: 0px;">Rules</h2>
-                        <ul>
-                            <li>Each player rolls up to 3 times per turn.</li>
-                            <li>You may hold dice between rolls.</li>
-                            <li>Hand ranking:
-                            <ul>
-                                <li>Five of a Kind ⚀⚀⚀⚀⚀</li>
-                                <li>Four of a Kind ⚃⚃⚃⚃</li>
-                                <li>Full House ⚁⚁⚄⚄⚄</li>
-                                <li>Straight ⚀⚁⚂⚃⚄ </li>
-                                <li>Three of a Kind ⚀⚀⚀</li>
-                                <li>Two Pair ⚄⚄⚀⚀</li>
-                                <li>One Pair ⚄⚄</li>
-                                <li>High Die</li>
-                            </ul>
-                            </li>
-                            <li>Higher hand wins.</li>
-                        </ul>
-                    </div> 
-                
                 </div>
-            <!-- </div>  -->
-
+                
+                <div class="card">
+                    <h3 style="text-align: center; margin-top: 0px;">Rules</h2>
+                    <ul>
+                        <li>Each player rolls up to 3 times per turn.</li>
+                        <li>You may hold dice between rolls.</li>
+                        <li>Hand ranking:
+                        <ul>
+                            <li>Five of a Kind ⚀⚀⚀⚀⚀</li>
+                            <li>Four of a Kind ⚃⚃⚃⚃</li>
+                            <li>Full House ⚁⚁⚄⚄⚄</li>
+                            <li>Straight ⚀⚁⚂⚃⚄ </li>
+                            <li>Three of a Kind ⚀⚀⚀</li>
+                            <li>Two Pair ⚄⚄⚀⚀</li>
+                            <li>One Pair ⚄⚄</li>
+                            <li>High Die</li>
+                        </ul>
+                        </li>
+                        <li>Higher hand wins.</li>
+                    </ul>
+                </div>
             
+            </div>
         </main>
         
     <aside class="sidebar"></aside>
