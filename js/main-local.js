@@ -9,11 +9,9 @@ const game = {
   roundActive: false
 };
 
-// Update top status and dice UI
 function updateStatus(){
   if(!game.roundActive){
     statusDiv.textContent = 'Press "Start Round" to begin';
-    currentPlayerSpan.textContent = '—';
     rollsLeftSpan.textContent = '3';
     rollBtn.disabled = true;
     endBtn.disabled = true;
@@ -22,7 +20,6 @@ function updateStatus(){
   }
   const p = game.players[game.currentPlayer];
   statusDiv.textContent = `${p.name}'s turn`;
-  currentPlayerSpan.textContent = p.name;
   rollsLeftSpan.textContent = 3-p.rollsUsed;
   // enable / disable buttons
   rollBtn.disabled = (p.rollsUsed>=3);

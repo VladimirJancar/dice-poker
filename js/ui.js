@@ -1,4 +1,3 @@
-const currentPlayerSpan = document.getElementById('current-player');
 const rollsLeftSpan = document.getElementById('rolls-left');
 const diceDiv = document.getElementById('dice');
 const rollBtn = document.getElementById('roll-btn');
