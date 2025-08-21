@@ -15,6 +15,12 @@ body {
   background: #fcfcfc;
 }
 
+hr {
+  width: 100%;
+  border-top: 0.5px solid #ffffff;
+  margin: 8px 0;
+}
+
 .layout {
   display: grid;
   grid-template-columns: 1fr minmax(0, 1100px) 1fr;

@@ -6,6 +6,7 @@ const startBtn = document.getElementById('start-btn');
 const statusDiv = document.getElementById('status');
 const scoreboardDiv = document.getElementById('scoreboard');
 const currentHandDiv = document.getElementById('current-hand');
+const historyDiv = document.getElementById('round-history');
 const resultDiv = document.getElementById('result');
 
 function initUI() {
@@ -18,29 +19,18 @@ function initUI() {
     b.addEventListener('click', ()=>toggleHold(i));
     diceDiv.appendChild(b);
   }
-  renderScoreboard();
   updateStatus();
 }
 
-function renderScoreboard() {
-  scoreboardDiv.innerHTML = '';
-  game.players.forEach((p,idx)=>{
-    const box = document.createElement('div');
-    box.className = 'player-box';
-    const title = document.createElement('div');
-    title.style.fontWeight='700';
-    title.textContent = p.name + (game.currentPlayer===idx && game.roundActive ? ' ←' : '');
-    box.appendChild(title);
-    const info = document.createElement('div');
-    info.style.marginTop='8px';
-    if(p.finished){
-      info.innerHTML = `<div><strong>Final:</strong> ${p.hand.map(n=>DIE_FACE[n-1]).join(' ')}</div>
-                        <div><strong>Hand:</strong> ${p.score || '—'}</div>`;
-    } else {
-      info.innerHTML = `<div><strong>Status:</strong> ${p.rollsUsed>0?`rolled (${p.rollsUsed}/3)`:'not played'}</div>`;
-    }
-    box.appendChild(info);
-    scoreboardDiv.appendChild(box);
+function renderHistory() {
+  historyDiv.innerHTML = ``;
+  game.history.slice().reverse().forEach(rec => {
+    const record = document.createElement('div');
+    record.style = "display: flex; flex-direction: column; align-items: center;";
+    record.innerHTML =
+      `<hr><div>${rec.winner === 1 ? '<strong>P1</strong> > P2' : rec.winner === 2 ? 'P1 < <strong>P2</strong>' : 'P1 = P2'}</div>
+      <div>${rec.p1Dice} — ${rec.p2Dice}</div>`;
+    historyDiv.appendChild(record);
   });
 }
 
@@ -68,7 +58,6 @@ function updateStatus(){
     b.disabled = (p.rollsUsed===0); // only allow hold toggling after first roll
     if(game.held[i]) b.classList.add('held'); else b.classList.remove('held');
   });
-  renderScoreboard();
 }
 
 function currentHandInfo() {
