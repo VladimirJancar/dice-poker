@@ -21,6 +21,14 @@ hr {
   margin: 8px 0;
 }
 
+/*#################### INDEX ####################*/
+
+/* .menu {
+  
+} */
+
+/*#################### LOCAL ####################*/
+
 .layout {
   display: grid;
   grid-template-columns: 1fr minmax(0, 1100px) 1fr;
@@ -127,9 +135,6 @@ h1 {
   font-size: smaller;
   text-align: center;
   line-height: 25px
-}
-.opp-hand.rank {
-  font-size: large;
 }
 
 .centered-content {

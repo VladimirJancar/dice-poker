@@ -22,53 +22,53 @@
     <div class="layout">
     <aside class="sidebar"></aside>
 
-        <main class="main">
-            <div class="navbar">
-                <button class="back-btn" onclick="location.href='index.html'">Back to Menu</button>
-                <h1>Local 1v1</h1>
-                <button disabled class="hand-info" onclick="">Hand info</button>
-            </div>
+    <main class="main">
+        <div class="navbar">
+            <button class="back-btn" onclick="location.href='index.html'">Back to Menu</button>
+            <h1>Local 1v1</h1>
+            <button disabled class="hand-info" onclick="">Hand info</button>
+        </div>
 
-            <div class="middle-section">
-                <div class="middle-left">
-                    <div class="card"><div class="player-info">            
-                        <div id="status">Press "New Game" to begin</div>
-                    </div></div>
+        <div class="middle-section">
+            <div class="middle-left">
+                <div class="card"><div class="player-info">            
+                    <div id="status">Press "New Game" to begin</div>
+                </div></div>
 
-                    <div class="card">
-                        <div id="dice" class="dice-grid"></div>
-                    </div>
-                    
-                    <div class="card">
-                        <div id="controls-panel" style="margin-top:12px">
-                            <div class="controls">
-                                <button id="roll-btn" class="roll">Roll (<span id="rolls-left">0</span>/3)</button>
-                                <button id="end-btn" class="secondary" disabled>End Turn</button>
-                                <button id="start-btn" class="secondary">New Game</button>
-                            </div>
+                <div class="card">
+                    <div id="dice" class="dice-grid"></div>
+                </div>
+                
+                <div class="card">
+                    <div id="controls-panel" style="margin-top:12px">
+                        <div class="controls">
+                            <button id="roll-btn" class="roll">Roll (<span id="rolls-left">0</span>/3)</button>
+                            <button id="end-btn" class="secondary" disabled>End Turn</button>
+                            <button id="start-btn" class="secondary">New Game</button>
                         </div>
                     </div>
                 </div>
-                
-                <div class="middle-right">
-                    <div class="card">
-                        <div class="centered-content">
-                            <h1 style="font-size: medium;">Current Hand</h1>
-                            <div id="current-hand">—</div>
-                            <div class="opp-hand" id="opponent-hand"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="centered-content">
-                            <h1 style="font-size: medium;">History</h1>
-                            <div id="round-history">—</div>
-                        </div>
+            </div>
+            
+            <div class="middle-right">
+                <div class="card">
+                    <div class="centered-content">
+                        <h1 style="font-size: medium;">Current Hand</h1>
+                        <div id="current-hand">—</div>
+                        <div class="opp-hand" id="opponent-hand"></div>
                     </div>
                 </div>
                 
+                <div class="card">
+                    <div class="centered-content">
+                        <h1 style="font-size: medium;">History</h1>
+                        <div id="round-history">—</div>
+                    </div>
+                </div>
             </div>
-        </main>
+            
+        </div>
+    </main>
         
     <aside class="sidebar"></aside>
     </div>
