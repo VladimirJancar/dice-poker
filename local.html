@@ -20,59 +20,84 @@
 
 <body>
     <div class="layout">
-        <div class="card">    
-            <div class="top-row">
-                <h1>Dice Poker</h1>
-                <div class="info muted">Click a die to hold/unhold it. 3 rolls per turn (initial + up to 2 rerolls).</div>
-            </div>
+    <aside class="sidebar"></aside>
 
-            <div id="game-area">
-                <div id="status">Press "Start Round" to begin</div>
+    <main class="main">
+        <div class="navbar">
+            <button class="back-btn" onclick="location.href='index.html'">Back to Menu</button>
+            <h1>Local 1v1</h1>
+            <button disabled class="hand-info" onclick="">Hand info</button>
+        </div>
 
-                <div id="controls-panel" style="margin-top:12px">
-                    <div>Current: <span id="current-player">—</span> &nbsp; • &nbsp; Rolls used: <span id="rolls-used">0</span>/3</div>
+        <div class="middle-section">
+            <div class="middle-left">
+                <div class="card"><div class="player-info">            
+                    <div id="status">Press "New Game" to begin</div>
+                </div></div>
 
+                <div class="card">
                     <div id="dice" class="dice-grid"></div>
-
-                    <div class="controls">
-                        <button id="roll-btn">Roll / Re-roll</button>
-                        <button id="end-btn" class="secondary" disabled>End Turn</button>
-                        <button id="start-btn" class="secondary">Start Round</button>
+                </div>
+                
+                <div class="card">
+                    <div id="controls-panel" style="margin-top:12px">
+                        <div class="controls">
+                            <button id="roll-btn" class="roll">Roll (<span id="rolls-left">0</span>/3)</button>
+                            <button id="end-btn" class="secondary" disabled>End Turn</button>
+                            <button id="start-btn" class="secondary">New Game</button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="scoreboard" id="scoreboard" style="margin-top:14px"></div>
-                <div id="result" class="result" style="display:none;margin-top:12px"></div>
-
             </div>
-        </div> 
-
-        <div class="rules">
-            <h3 style="text-align: center; margin-top: 0px;">Rules</h2>
-            <ul>
-                <li>Each player rolls up to 3 times per turn.</li>
-                <li>You may hold dice between rolls.</li>
-                <li>Hand ranking:
-                <ul>
-                    <li>Five of a Kind ⚀⚀⚀⚀⚀</li>
-                    <li>Four of a Kind ⚃⚃⚃⚃</li>
-                    <li>Full House ⚁⚁⚄⚄⚄</li>
-                    <li>Straight ⚀⚁⚂⚃⚄ </li>
-                    <li>Three of a Kind ⚀⚀⚀</li>
-                    <li>Two Pair ⚄⚄⚀⚀</li>
-                    <li>One Pair ⚄⚄</li>
-                    <li>High Die</li>
-                </ul>
-                </li>
-                <li>Higher hand wins.</li>
-            </ul>
+            
+            <div class="middle-right">
+                <div class="card">
+                    <div class="centered-content">
+                        <h1 style="font-size: medium;">Current Hand</h1>
+                        <div id="current-hand">—</div>
+                        <div class="opp-hand" id="opponent-hand"></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="centered-content">
+                        <h1 style="font-size: medium;">History</h1>
+                        <div id="round-history">—</div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
+    </main>
+        
+    <aside class="sidebar"></aside>
     </div>
-    
-  
   <script src="js/utils.js"></script>
   <script src="js/game.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/main-local.js"></script>
 </body>
 </html>
+
+<!-- 
+<div class="card">
+    <h3 style="text-align: center; margin-top: 0px;">Rules</h2>
+    <ul>
+        <li>Each player rolls up to 3 times per turn.</li>
+        <li>You may hold dice between rolls.</li>
+        <li>Hand ranking:
+        <ul>
+            <li>Five of a Kind ⚀⚀⚀⚀⚀</li>
+            <li>Four of a Kind ⚃⚃⚃⚃</li>
+            <li>Full House ⚁⚁⚄⚄⚄</li>
+            <li>Straight ⚀⚁⚂⚃⚄ </li>
+            <li>Three of a Kind ⚀⚀⚀</li>
+            <li>Two Pair ⚄⚄⚀⚀</li>
+            <li>One Pair ⚄⚄</li>
+            <li>High Die</li>
+        </ul>
+        </li>
+        <li>Higher hand wins.</li>
+    </ul>
+</div>
+ -->
