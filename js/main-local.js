@@ -51,6 +51,10 @@ function onEndTurn(){
   } else {
     addHistoryRecord();
     renderHistory();
+    const latestRecord = game.history[game.history.length - 1]; // More efficient than game.roundNumber-1
+    statusDiv.innerHTML = latestRecord.winner === 0
+      ? '<strong>Tie!</strong>'
+      : `<strong>Player ${latestRecord.winner} Wins!</strong>`;
     game.roundActive = false;
   }
   updateStatus();
@@ -68,6 +72,7 @@ function startRound(){
   });
   game.held = [false,false,false,false,false];
   resultDiv.style.display = 'none';
+  statusDiv.textContent = 'Press "New Game" to begin';
   updateStatus();
 }
 

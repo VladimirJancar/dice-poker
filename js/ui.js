@@ -36,7 +36,6 @@ function renderHistory() {
 
 function updateStatus(){
   if(!game.roundActive){
-    statusDiv.textContent = 'Press "Start Round" to begin';
     rollsLeftSpan.textContent = '3';
     rollBtn.disabled = true;
     endBtn.disabled = true;
