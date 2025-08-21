@@ -9,31 +9,6 @@ const game = {
   roundActive: false
 };
 
-function updateStatus(){
-  if(!game.roundActive){
-    statusDiv.textContent = 'Press "Start Round" to begin';
-    rollsLeftSpan.textContent = '3';
-    rollBtn.disabled = true;
-    endBtn.disabled = true;
-    resultDiv.style.display = 'none';
-    return;
-  }
-  const p = game.players[game.currentPlayer];
-  statusDiv.textContent = `${p.name}'s turn`;
-  rollsLeftSpan.textContent = 3-p.rollsUsed;
-  // enable / disable buttons
-  rollBtn.disabled = (p.rollsUsed>=3);
-  endBtn.disabled = (p.rollsUsed===0);
-  // update dice buttons
-  const diceButtons = diceDiv.querySelectorAll('.die');
-  diceButtons.forEach((b,i)=>{
-    const val = p.hand[i];
-    b.textContent = val?DIE_FACE[val-1]:DIE_FACE[0];
-    b.disabled = (p.rollsUsed===0); // only allow hold toggling after first roll
-    if(game.held[i]) b.classList.add('held'); else b.classList.remove('held');
-  });
-  renderScoreboard();
-}
 // Toggle hold on a die index (only during a player's turn after roll)
 function toggleHold(i){
   const p = game.players[game.currentPlayer];
@@ -44,30 +19,29 @@ function toggleHold(i){
 // Roll or re-roll
 function onRoll(){
   const p = game.players[game.currentPlayer];
-  if(p.rollsUsed>=3) return; // safety
+  if(p.rollsUsed>=3) return;
   if(p.rollsUsed===0){
-    // initial roll: roll all five dice
     p.hand = [randDie(),randDie(),randDie(),randDie(),randDie()];
   } else {
-    // re-roll only dice that are NOT held
     for(let i=0;i<5;i++) if(!game.held[i]) p.hand[i]=randDie();
   }
   p.rollsUsed++;
-  // automatically clear holds when rolls are exhausted? keep them as-is
-  // If player used all rolls, disable further rerolls
+
   updateStatus();
-  // If they've used all 3 rolls, automatically disable roll button (handled in updateStatus)
+  currentHandInfo();
 }
-// End current player's turn and switch or finish round
+
 function onEndTurn(){
   const p = game.players[game.currentPlayer];
-  if(p.rollsUsed===0) return; // cannot end without rolling
-  // Evaluate their hand and mark finished
+  if(p.rollsUsed===0) return;
+
   const {name,scoreArray} = evaluateAndLabel(p.hand);
   p.score = name;
   p.scoreArray = scoreArray;
   p.finished = true;
-  // reset held for next player
+
+  currentHandInfo();
+
   game.held = [false,false,false,false,false];
   // switch player or finish round
   if(game.currentPlayer === 0){
@@ -95,13 +69,10 @@ function startRound(){
   resultDiv.style.display = 'none';
   updateStatus();
 }
-// Evaluate hand and return readable label + score array used for tie-breaking
-// scoreArray is an array where higher is better; compare lexicographically
+
 function evaluateAndLabel(hand){
-  // hand is array length 5 with numbers 1..6
   const counts = {};
   hand.forEach(d=>counts[d] = (counts[d]||0)+1);
-  // convert to array of {value,count}
   let countPairs = Object.keys(counts).map(v=>({value:parseInt(v),count:counts[v]}));
 
   countPairs.sort((a,b)=> (b.count - a.count) || (b.value - a.value) );
@@ -118,13 +89,13 @@ function evaluateAndLabel(hand){
   let label = 'High Die';
   let rank = 0;
   let scoreArray = [];
-  if(countsSorted[0] === 5){ label = 'Five of a Kind'; rank = 7; scoreArray = [rank, ...expanded]; }
-  else if(countsSorted[0] === 4){ label = 'Four of a Kind'; rank = 6; scoreArray = [rank, ...expanded]; }
-  else if(countsSorted[0] === 3 && countsSorted[1] === 2){ label = 'Full House'; rank = 5; scoreArray = [rank, ...expanded]; }
-  else if(isStraight){ label = 'Straight'; rank = 4; scoreArray = [rank, uniqueSorted[4]]; }
-  else if(countsSorted[0] === 3){ label = 'Three of a Kind'; rank = 3; scoreArray = [rank, ...expanded]; }
-  else if(countsSorted[0] === 2 && countsSorted[1] === 2){ label = 'Two Pair'; rank = 2; scoreArray = [rank, ...expanded]; }
-  else if(countsSorted[0] === 2){ label = 'One Pair'; rank = 1; scoreArray = [rank, ...expanded]; }
+  if(countsSorted[0] === 5){ label = 'Five of a Kind ☆☆☆☆☆☆☆'; rank = 7; scoreArray = [rank, ...expanded]; }
+  else if(countsSorted[0] === 4){ label = 'Four of a Kind ☆☆☆☆☆☆'; rank = 6; scoreArray = [rank, ...expanded]; }
+  else if(countsSorted[0] === 3 && countsSorted[1] === 2){ label = 'Full House ☆☆☆☆☆'; rank = 5; scoreArray = [rank, ...expanded]; }
+  else if(isStraight){ label = 'Straight ☆☆☆☆'; rank = 4; scoreArray = [rank, uniqueSorted[4]]; }
+  else if(countsSorted[0] === 3){ label = 'Three of a Kind ☆☆☆'; rank = 3; scoreArray = [rank, ...expanded]; }
+  else if(countsSorted[0] === 2 && countsSorted[1] === 2){ label = 'Two Pair ☆☆'; rank = 2; scoreArray = [rank, ...expanded]; }
+  else if(countsSorted[0] === 2){ label = 'One Pair ☆'; rank = 1; scoreArray = [rank, ...expanded]; }
   else { label = 'High Die'; rank = 0; scoreArray = [rank, ...hand.slice().sort((a,b)=>b-a)]; }
   return {name: label, scoreArray};
 }
