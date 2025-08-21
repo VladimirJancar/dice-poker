@@ -32,7 +32,7 @@
             <div class="middle-section">
                 <div class="middle-left">
                     <div class="card"><div class="player-info">            
-                        <div id="status">Press "Start Round" to begin</div>
+                        <div id="status">Press "New Game" to begin</div>
                     </div></div>
 
                     <div class="card">
@@ -41,30 +41,26 @@
                     
                     <div class="card">
                         <div id="controls-panel" style="margin-top:12px">
-                            
                             <div class="controls">
                                 <button id="roll-btn" class="roll">Roll (<span id="rolls-left">0</span>/3)</button>
                                 <button id="end-btn" class="secondary" disabled>End Turn</button>
                                 <button id="start-btn" class="secondary">New Game</button>
                             </div>
                         </div>
-
-                        <div class="scoreboard" id="scoreboard" style="margin-top:14px"></div>
-                        <div id="result" class="result" style="display:none;margin-top:12px"></div>
                     </div>
-                    
                 </div>
                 
                 <div class="middle-right">
                     <div class="card">
-                        <div style="margin-top: 15px; min-height: 70px ; display: flex; flex-direction: column; align-items: center;">
+                        <div class="centered-content">
                             <h1 style="font-size: medium;">Current Hand</h1>
                             <div id="current-hand">—</div>
+                            <div class="opp-hand" id="opponent-hand"></div>
                         </div>
                     </div>
                     
                     <div class="card">
-                        <div style="margin-top: 15px; min-height: 70px ; display: flex; flex-direction: column; align-items: center;">
+                        <div class="centered-content">
                             <h1 style="font-size: medium;">History</h1>
                             <div id="round-history">—</div>
                         </div>

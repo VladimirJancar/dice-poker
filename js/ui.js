@@ -4,10 +4,9 @@ const rollBtn = document.getElementById('roll-btn');
 const endBtn = document.getElementById('end-btn');
 const startBtn = document.getElementById('start-btn');
 const statusDiv = document.getElementById('status');
-const scoreboardDiv = document.getElementById('scoreboard');
 const currentHandDiv = document.getElementById('current-hand');
+const opponentHandDiv = document.getElementById('opponent-hand')
 const historyDiv = document.getElementById('round-history');
-const resultDiv = document.getElementById('result');
 
 function initUI() {
   diceDiv.innerHTML = '';
@@ -39,7 +38,6 @@ function updateStatus(){
     rollsLeftSpan.textContent = '3';
     rollBtn.disabled = true;
     endBtn.disabled = true;
-    resultDiv.style.display = 'none';
     return;
   }
 
@@ -54,7 +52,7 @@ function updateStatus(){
   diceButtons.forEach((b,i)=>{
     const val = p.hand[i];
     b.textContent = val?DIE_FACE[val-1]:DIE_FACE[0];
-    b.disabled = (p.rollsUsed===0); // only allow hold toggling after first roll
+    b.disabled = (p.rollsUsed===0);
     if(game.held[i]) b.classList.add('held'); else b.classList.remove('held');
   });
 }
@@ -67,4 +65,5 @@ function currentHandInfo() {
   }
   const { name } = evaluateAndLabel(p.hand);
   currentHandDiv.innerHTML = `${name || '—'}`;
+  opponentHandDiv.innerHTML = `${game.currentPlayer === 1 ? "<b>Opponent's best:</b><br>" + game.players[0].score : ''}`
 }
